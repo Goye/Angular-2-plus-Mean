@@ -6,7 +6,8 @@ import {Message} from "./messages/message";
     template: ` 
       <div class="row">
         <section class="col-md-8 col-md-offset-2">
-          <input type="text" [(ngModel)] = "message.content" />
+          <my-message *ngFor="let message of messages" [message]="message" (editClicked)="message.content = $event">
+          </my-message>
         </section>
       </div> 
       <div class="row">
@@ -15,5 +16,8 @@ import {Message} from "./messages/message";
     directives: [MessageComponent]
 })
 export class AppComponent {
-  message: Message = new Message('Hello world', null, 'Max');
+  messages: Message[] = [
+    new Message('Hello world', null, 'Max'),
+    new Message('New message', null, 'Goye')
+  ];
 }

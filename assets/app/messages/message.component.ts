@@ -3,6 +3,7 @@ import {Message} from "./message";
 @Component({
   selector: 'my-message',
   template: `
+    <input type="text" [(ngModel)] = "message.content" />
     <article class="panel panel-default" [ngStyle]="{'background-color': color}" *ngIf="show">
       <div class="panel-body">
         {{ message.content }}
