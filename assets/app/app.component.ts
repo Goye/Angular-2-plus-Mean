@@ -1,15 +1,27 @@
-import {Component} from 'angular2/core';
-import {MessageListComponent} from "./messages/message-list.component";
+import {Component} from '@angular/core';
+import {Routes, ROUTER_DIRECTIVES} from '@angular/router';
+import {MessagesComponent} from './messages/messages.component';
+import {AuthenticationComponent} from './auth/authentication.component';
+import {HeaderComponent} from './header.component';
 @Component({
     selector: 'my-app',
     template: ` 
-      <div class="row">
-      </div> 
-      <div class="row">
-        <my-message-list></my-message-list>
+      <div class="container">
+        <my-header></my-header>
+        <router-outlet></router-outlet>
       </div>
     `,
-    directives: [MessageListComponent]
+    directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
+@Routes([
+  {
+    path: '/',
+    component: MessagesComponent,
+  },
+  {
+    path: '/auth',
+    component: AuthenticationComponent
+  }
+])
 export class AppComponent {
 }

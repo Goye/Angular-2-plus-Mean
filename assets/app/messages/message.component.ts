@@ -1,9 +1,10 @@
-import {Component, Input, Output, EventEmitter} from "angular2/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Message} from "./message";
+import {MessageService} from "./message.service";
 @Component({
   selector: 'my-message',
   template: `
-    <input type="text" [(ngModel)] = "message.content" />
+    <!-- <input type="text" [(ngModel)] = "message.content" /> -->
     <article class="panel panel-default" [ngStyle]="{'background-color': color}" *ngIf="show">
       <div class="panel-body">
         {{ message.content }}
@@ -13,8 +14,8 @@ import {Message} from "./message";
           {{ message.username }}
         </div>
         <div class="config">
-          <a href="#" (click)="onClick()">Edit</a>
-          <a href="#">Delete</a>
+          <a href="#" (click)="onEdit()">Edit</a>
+          <a href="#" (click)="onDelete()">Delete</a>
         </div>
       </footer>
     </article>
@@ -40,7 +41,13 @@ export class MessageComponent {
   @Output() editClicked = new EventEmitter<string>();
   color = "white";
   show = true;
-  onClick() {
-    this.editClicked.emit('Changed');
+
+  constructor (private _messageService: MessageService) {}
+
+  onEdit() {
+    this._messageService.editMessage(this.message);
+  }
+  onDelete() {
+    this._messageService.deleteMessage(this.message);
   }
 }
