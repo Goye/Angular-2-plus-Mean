@@ -14,14 +14,8 @@ import {HeaderComponent} from './header.component';
     directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @Routes([
-  {
-    path: '/',
-    component: MessagesComponent,
-  },
-  {
-    path: '/auth',
-    component: AuthenticationComponent
-  }
+  { path: '/', component: MessagesComponent },
+  { path: '/auth', component: AuthenticationComponent }
 ])
 export class AppComponent {
 }
